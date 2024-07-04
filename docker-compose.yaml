@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: hh_parser_app
+    build: ./
+    depends_on: 
+      - db
+    volumes:
+      - .:/src
+    restart: always
+    ports:
+      - 5555:5432
+    env_file:
+      - .env
+  db:
+    container_name: db
+    image: postgres
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - .postgres:/var/lib/postgres/data
+    restart: always

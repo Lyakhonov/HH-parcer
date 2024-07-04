@@ -6,6 +6,7 @@ import psycopg2
 from dotenv import load_dotenv
 import os
 
+
 load_dotenv()
 
 db_config = {
@@ -15,7 +16,6 @@ db_config = {
     'host': os.getenv('DB_HOST'),
     'port': os.getenv('DB_PORT')
 }
-
 params = {
             "area": 113,
             "per_page": 100
@@ -164,7 +164,7 @@ def profession(message):
         params["text"] += f" {profession}"
     else:
         params["text"] = profession
-    prof_msg = 'Опыт успешно записан. Выберете следующее действие'
+    prof_msg = 'Профессия успешно записана. Выберете следующее действие'
     markup = types.InlineKeyboardMarkup()
     btn1 = types.InlineKeyboardButton('Добавить другие поля',
                                       callback_data='form')
@@ -444,7 +444,6 @@ def callback_message(callback):
         global params
         try:
             conn = psycopg2.connect(**db_config)
-            create_table(conn)
             logging.info("Подключение для отправки сообщения установлено.")
         except Exception as err:
             logging.info("Не удалось установить подключение к БД.")
