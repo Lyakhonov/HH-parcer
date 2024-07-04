@@ -3,7 +3,7 @@ from sqlalchemy import MetaData, Table, Column, Integer, String, Sequence
 metadata = MetaData()
 
 
-vacancy = Table(
+vacancies = Table(
     "vacancies",
     metadata,
     Column("id", Integer, Sequence("vac_id_seq"), primary_key=True,),
