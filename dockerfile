@@ -10,4 +10,4 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY . .
 
-CMD alembic upgrade head;python main.py
+CMD alembic upgrade head;python config.py;python main.py

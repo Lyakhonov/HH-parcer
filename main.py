@@ -3,18 +3,16 @@ from telebot import types
 import logging
 import requests
 import psycopg2
-from dotenv import load_dotenv
-import os
+from config import DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
+from config import API_TOKEN, BOT_TOKEN
 
-
-load_dotenv()
 
 db_config = {
-    'dbname': os.getenv('DB_NAME'),
-    'user': os.getenv('DB_USER'),
-    'password': os.getenv('DB_PASSWORD'),
-    'host': os.getenv('DB_HOST'),
-    'port': os.getenv('DB_PORT')
+    'dbname': DB_NAME,
+    'user': DB_USER,
+    'password': DB_PASSWORD,
+    'host': DB_HOST,
+    'port': DB_PORT
 }
 params = {
             "area": 113,
@@ -106,7 +104,7 @@ def filter_vacancies(conn, filters_res):
     return vacancies_list
 
 
-bot = telebot.TeleBot(os.getenv('BOT_TOKEN'))
+bot = telebot.TeleBot(BOT_TOKEN)
 
 
 @bot.message_handler(commands=['start'])
@@ -458,7 +456,7 @@ def callback_message(callback):
 
         url = "https://api.hh.ru/vacancies"
         headers = {
-            "Authorization": f"Bearer {os.getenv('API_TOKEN')}",
+            "Authorization": f"Bearer {API_TOKEN}",
         }
         response = requests.get(url, params=params, headers=headers)
         if response.status_code == 200:
