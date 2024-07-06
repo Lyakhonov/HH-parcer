@@ -27,28 +27,6 @@ logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-def create_table(conn):
-    cur = conn.cursor()
-
-    create_table_query = """
-        CREATE TABLE IF NOT EXISTS vacancies (
-            id SERIAL PRIMARY KEY,
-            title VARCHAR(200),
-            area VARCHAR(50),
-            company_name VARCHAR(200),
-            experience VARCHAR(50),
-            salary INTEGER,
-            currency VARCHAR(10),
-            url VARCHAR(200)
-        )
-    """
-    cur.execute(create_table_query)
-    conn.commit()
-    cur.close()
-
-    logging.info("Таблица 'vacancies' успешно создана.")
-
-
 def remove_duplicates(conn):
     cur = conn.cursor()
 
